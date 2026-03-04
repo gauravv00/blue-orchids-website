@@ -19,13 +19,16 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== NAVBAR ===== */
+/* =============================
+   NAVBAR
+============================= */
+
 .navbar{
   position:fixed;
   width:100%;
   top:0;
   backdrop-filter:blur(12px);
-  background:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.8);
   border-bottom:1px solid rgba(0,0,0,.05);
   z-index:1000;
 }
@@ -41,7 +44,11 @@ body{
 }
 
 .logo img{
-  height:85px;
+  height:80px;
+}
+
+.nav-links{
+  display:flex;
 }
 
 .nav-links a{
@@ -52,7 +59,8 @@ body{
   position:relative;
 }
 
-/* Animated underline */
+/* underline animation */
+
 .nav-links a::after{
   content:"";
   position:absolute;
@@ -68,8 +76,51 @@ body{
   width:100%;
 }
 
-/* ===== HERO ===== */
-.hero{
+/* =============================
+   MOBILE NAV
+============================= */
+
+.menu-toggle{
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+@media (max-width:900px){
+
+.nav-links{
+  position:absolute;
+  top:80px;
+  right:0;
+  width:100%;
+  background:white;
+  flex-direction:column;
+  align-items:center;
+  display:none;
+  padding:25px 0;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.nav-links a{
+  margin:15px 0;
+  font-size:18px;
+}
+
+.nav-links.show{
+  display:flex;
+}
+
+.menu-toggle{
+  display:block;
+}
+
+}
+
+/* =============================
+   HERO
+============================= */
+
+.hero-classic{
   height:100vh;
   background:var(--gradient);
   display:flex;
@@ -80,15 +131,19 @@ body{
   padding-top:120px;
 }
 
-.hero h1{
+.hero-classic h1{
   font-family:'Playfair Display',serif;
-  font-size:3.6rem;
+  font-size:3.8rem;
 }
 
-.hero p{
+.hero-classic p{
   margin:20px 0 40px;
   font-size:1.2rem;
 }
+
+/* =============================
+   BUTTONS
+============================= */
 
 .btn{
   padding:14px 32px;
@@ -98,17 +153,44 @@ body{
   transition:.3s;
 }
 
-.btn-primary{
+.btn-light{
   background:white;
-  color:var(--primary);
+  color:#0B1F5B;
 }
 
-.btn-primary:hover{
-  background:var(--secondary);
+.btn-light:hover{
+  background:#1E3A8A;
   color:white;
 }
 
-/* ===== SECTION ===== */
+.btn-primary{
+  background:white;
+  color:#0B1F5B;
+}
+
+.btn-primary:hover{
+  background:#1E3A8A;
+  color:white;
+}
+
+.btn-dark{
+  background:#0B1F5B;
+  color:white;
+  padding:12px 28px;
+  border-radius:40px;
+  text-decoration:none;
+  display:inline-block;
+  margin-top:25px;
+}
+
+.btn-dark:hover{
+  background:#1E3A8A;
+}
+
+/* =============================
+   SECTION
+============================= */
+
 .section{
   padding:120px 0;
 }
@@ -136,7 +218,10 @@ body{
   font-size:2rem;
 }
 
-/* ===== GRID ===== */
+/* =============================
+   GRID
+============================= */
+
 .grid{
   display:grid;
   gap:30px;
@@ -150,7 +235,10 @@ body{
   grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
 }
 
-/* ===== CARD ===== */
+/* =============================
+   CARDS
+============================= */
+
 .card{
   background:white;
   padding:40px;
@@ -163,7 +251,10 @@ body{
   transform:translateY(-8px);
 }
 
-/* ===== OFFERS ===== */
+/* =============================
+   OFFER CARDS
+============================= */
+
 .offer-card{
   background:white;
   padding:50px;
@@ -184,99 +275,10 @@ body{
   margin:20px 0;
 }
 
-/* ===== MAP ===== */
-iframe{
-  width:100%;
-  height:350px;
-  border:0;
-  border-radius:16px;
-  margin-top:20px;
-}
+/* =============================
+   TESTIMONIAL
+============================= */
 
-/* ===== FOOTER ===== */
-.footer{
-  background:var(--primary);
-  color:white;
-  text-align:center;
-  padding:40px;
-  margin-top:60px;
-}
-
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 350px;
-  gap:60px;
-  align-items:start;
-}
-
-.about-text p{
-  margin-bottom:20px;
-}
-
-.about-image{
-  text-align:center;
-}
-
-.about-image img{
-  width:250px;     /* Smaller Photo */
-  height:auto;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
-  margin-bottom:15px;
-}
-
-/* ===== CLASSIC HERO ===== */
-.hero-classic{
-  height:100vh;
-  background:linear-gradient(135deg,#0B1F5B,#1E3A8A);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:white;
-  padding-top:120px;
-}
-
-.hero-classic h1{
-  font-family:'Playfair Display',serif;
-  font-size:3.8rem;
-}
-
-.hero-classic p{
-  margin:20px 0 40px;
-  font-size:1.2rem;
-}
-
-.btn-light{
-  background:white;
-  color:#0B1F5B;
-  padding:14px 32px;
-  border-radius:40px;
-  text-decoration:none;
-  font-weight:600;
-  transition:.3s;
-}
-
-.btn-light:hover{
-  background:#1E3A8A;
-  color:white;
-}
-
-.btn-dark{
-  background:#0B1F5B;
-  color:white;
-  padding:12px 28px;
-  border-radius:40px;
-  text-decoration:none;
-  display:inline-block;
-  margin-top:30px;
-}
-
-.btn-dark:hover{
-  background:#1E3A8A;
-}
-
-/* ===== TESTIMONIAL ===== */
 .testimonial-wrapper{
   max-width:700px;
   margin:0 auto 30px;
@@ -285,11 +287,20 @@ iframe{
 
 .testimonial{
   display:none;
-  font-size:1.1rem;
 }
 
 .testimonial.active{
   display:block;
+}
+
+.review-text{
+  font-size:1.2rem;
+  margin-bottom:12px;
+}
+
+.stars{
+  font-size:20px;
+  color:#0B1F5B;
 }
 
 .dots{
@@ -310,7 +321,105 @@ iframe{
   opacity:1;
 }
 
-/* Scroll animation */
+.google-btn{
+  text-align:center;
+  margin-top:20px;
+}
+
+/* =============================
+   ABOUT PAGE
+============================= */
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 350px;
+  gap:60px;
+  align-items:start;
+}
+
+.about-text p{
+  margin-bottom:20px;
+  line-height:1.7;
+}
+
+.about-image{
+  text-align:center;
+}
+
+.about-image img{
+  width:250px;
+  height:auto;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  margin-bottom:15px;
+}
+
+/* MOBILE FIX */
+
+@media (max-width:900px){
+
+.about-grid{
+  grid-template-columns:1fr;
+  text-align:center;
+  gap:40px;
+}
+
+.about-image img{
+  width:200px;
+}
+
+}
+
+/* =============================
+   MAP
+============================= */
+
+iframe{
+  width:100%;
+  height:350px;
+  border:0;
+  border-radius:16px;
+  margin-top:20px;
+}
+
+/* =============================
+   FOOTER
+============================= */
+
+.footer{
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  padding:40px;
+  margin-top:60px;
+}
+
+/* =============================
+   WHATSAPP BUTTON
+============================= */
+
+.whatsapp-float{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  background:#25D366;
+  color:white;
+  padding:14px 22px;
+  border-radius:40px;
+  font-weight:600;
+  text-decoration:none;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  z-index:2000;
+}
+
+.whatsapp-float:hover{
+  opacity:.9;
+}
+
+/* =============================
+   SCROLL REVEAL
+============================= */
+
 .reveal{
   opacity:0;
   transform:translateY(40px);
@@ -320,96 +429,4 @@ iframe{
 .reveal.active{
   opacity:1;
   transform:translateY(0);
-}
-
-/* =============================
-   Mobile Navigation
-============================= */
-
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-@media (max-width: 900px) {
-  .nav-links {
-    position: absolute;
-    top: 80px;
-    right: 0;
-    background: white;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    display: none;
-    padding: 20px 0;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
-  }
-
-  .nav-links a {
-    margin: 15px 0;
-    font-size: 1.1rem;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-}
-
-/* =============================
-   Floating WhatsApp Button
-============================= */
-
-.whatsapp-float {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: #25D366;
-  color: white;
-  padding: 14px 22px;
-  border-radius: 40px;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,.2);
-  z-index: 2000;
-}
-
-.whatsapp-float:hover {
-  opacity: 0.9;
-}
-/* ===== TESTIMONIAL IMPROVEMENT ===== */
-
-.review-text{
-  font-size:1.2rem;
-  margin-bottom:12px;
-}
-
-.stars{
-  font-size:20px;
-  color:#0B1F5B;
-}
-
-.google-btn{
-  text-align:center;
-  margin-top:25px;
-}
-/* ===== TESTIMONIAL IMPROVEMENT ===== */
-
-.review-text{
-  font-size:1.2rem;
-  margin-bottom:12px;
-}
-
-.stars{
-  font-size:20px;
-  color:#0B1F5B;
-}
-
-.google-btn{
-  text-align:center;
-  margin-top:25px;
 }
