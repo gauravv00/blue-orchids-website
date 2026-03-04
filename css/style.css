@@ -1,0 +1,415 @@
+:root{
+  --primary:#0B1F5B;
+  --secondary:#1E3A8A;
+  --gradient:linear-gradient(135deg,#0B1F5B,#1E3A8A);
+  --light:#F4F7FF;
+  --white:#ffffff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:#1f2937;
+  background:#fff;
+  overflow-x:hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position:fixed;
+  width:100%;
+  top:0;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.75);
+  border-bottom:1px solid rgba(0,0,0,.05);
+  z-index:1000;
+}
+
+.nav-inner{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 0;
+}
+
+.logo img{
+  height:85px;
+}
+
+.nav-links a{
+  margin-left:28px;
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:500;
+  position:relative;
+}
+
+/* Animated underline */
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:0%;
+  height:2px;
+  background:var(--secondary);
+  transition:.3s;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+/* ===== HERO ===== */
+.hero{
+  height:100vh;
+  background:var(--gradient);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding-top:120px;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:3.6rem;
+}
+
+.hero p{
+  margin:20px 0 40px;
+  font-size:1.2rem;
+}
+
+.btn{
+  padding:14px 32px;
+  border-radius:40px;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.btn-primary{
+  background:white;
+  color:var(--primary);
+}
+
+.btn-primary:hover{
+  background:var(--secondary);
+  color:white;
+}
+
+/* ===== SECTION ===== */
+.section{
+  padding:120px 0;
+}
+
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+}
+
+.section.light{
+  background:var(--light);
+}
+
+.section.gradient{
+  background:var(--gradient);
+  color:white;
+  text-align:center;
+}
+
+.section-title{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  margin-bottom:60px;
+  font-size:2rem;
+}
+
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  gap:30px;
+}
+
+.grid-3{
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+}
+
+.grid-2{
+  grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+}
+
+/* ===== CARD ===== */
+.card{
+  background:white;
+  padding:40px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+/* ===== OFFERS ===== */
+.offer-card{
+  background:white;
+  padding:50px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.offer-title{
+  font-size:1.6rem;
+  margin:15px 0;
+}
+
+.offer-price{
+  font-size:2rem;
+  font-weight:600;
+  color:var(--primary);
+  margin:20px 0;
+}
+
+/* ===== MAP ===== */
+iframe{
+  width:100%;
+  height:350px;
+  border:0;
+  border-radius:16px;
+  margin-top:20px;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  padding:40px;
+  margin-top:60px;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 350px;
+  gap:60px;
+  align-items:start;
+}
+
+.about-text p{
+  margin-bottom:20px;
+}
+
+.about-image{
+  text-align:center;
+}
+
+.about-image img{
+  width:250px;     /* Smaller Photo */
+  height:auto;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  margin-bottom:15px;
+}
+
+/* ===== CLASSIC HERO ===== */
+.hero-classic{
+  height:100vh;
+  background:linear-gradient(135deg,#0B1F5B,#1E3A8A);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding-top:120px;
+}
+
+.hero-classic h1{
+  font-family:'Playfair Display',serif;
+  font-size:3.8rem;
+}
+
+.hero-classic p{
+  margin:20px 0 40px;
+  font-size:1.2rem;
+}
+
+.btn-light{
+  background:white;
+  color:#0B1F5B;
+  padding:14px 32px;
+  border-radius:40px;
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
+}
+
+.btn-light:hover{
+  background:#1E3A8A;
+  color:white;
+}
+
+.btn-dark{
+  background:#0B1F5B;
+  color:white;
+  padding:12px 28px;
+  border-radius:40px;
+  text-decoration:none;
+  display:inline-block;
+  margin-top:30px;
+}
+
+.btn-dark:hover{
+  background:#1E3A8A;
+}
+
+/* ===== TESTIMONIAL ===== */
+.testimonial-wrapper{
+  max-width:700px;
+  margin:0 auto 30px;
+  text-align:center;
+}
+
+.testimonial{
+  display:none;
+  font-size:1.1rem;
+}
+
+.testimonial.active{
+  display:block;
+}
+
+.dots{
+  margin-bottom:20px;
+}
+
+.dot{
+  height:10px;
+  width:10px;
+  background:#0B1F5B;
+  border-radius:50%;
+  display:inline-block;
+  margin:0 5px;
+  opacity:.3;
+}
+
+.dot.active{
+  opacity:1;
+}
+
+/* Scroll animation */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =============================
+   Mobile Navigation
+============================= */
+
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background: white;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    padding: 20px 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  }
+
+  .nav-links a {
+    margin: 15px 0;
+    font-size: 1.1rem;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* =============================
+   Floating WhatsApp Button
+============================= */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 40px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+  z-index: 2000;
+}
+
+.whatsapp-float:hover {
+  opacity: 0.9;
+}
+/* ===== TESTIMONIAL IMPROVEMENT ===== */
+
+.review-text{
+  font-size:1.2rem;
+  margin-bottom:12px;
+}
+
+.stars{
+  font-size:20px;
+  color:#0B1F5B;
+}
+
+.google-btn{
+  text-align:center;
+  margin-top:25px;
+}
+/* ===== TESTIMONIAL IMPROVEMENT ===== */
+
+.review-text{
+  font-size:1.2rem;
+  margin-bottom:12px;
+}
+
+.stars{
+  font-size:20px;
+  color:#0B1F5B;
+}
+
+.google-btn{
+  text-align:center;
+  margin-top:25px;
+}
