@@ -6,35 +6,30 @@ if (navbar) {
   }, { passive: true });
 }
 
-// ── Mobile menu ──────────────────────────────────────────────
-function toggleMenu() {
-  const nav = document.querySelector('.navbar nav');
-  const btn = document.querySelector('.menu-toggle');
+// ── Mobile menu (pure CSS toggle, no JS position hacks) ──────
+function openMenu() {
+  const nav = document.querySelector('.nav-desktop');
   if (!nav) return;
-  const open = nav.classList.toggle('open');
-  btn.setAttribute('aria-expanded', open);
-  document.body.style.overflow = open ? 'hidden' : '';
-  const spans = btn.querySelectorAll('span');
-  if (open) {
-    spans[0].style.transform = 'rotate(45deg) translate(5px,5px)';
-    spans[1].style.opacity = '0';
-    spans[2].style.transform = 'rotate(-45deg) translate(5px,-5px)';
-  } else {
-    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-  }
+  nav.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+function closeMenu() {
+  const nav = document.querySelector('.nav-desktop');
+  if (!nav) return;
+  nav.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function toggleMenu() {
+  const nav = document.querySelector('.nav-desktop');
+  if (!nav) return;
+  nav.classList.contains('open') ? closeMenu() : openMenu();
+}
+
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const nav = document.querySelector('.navbar nav');
-    if (nav && nav.classList.contains('open')) toggleMenu();
-  }
+  if (e.key === 'Escape') closeMenu();
 });
-// Close on nav link click
 document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => {
-    const nav = document.querySelector('.navbar nav');
-    if (nav && nav.classList.contains('open')) toggleMenu();
-  });
+  a.addEventListener('click', closeMenu);
 });
 
 // ── Active nav link ──────────────────────────────────────────
@@ -48,8 +43,10 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 
 // ── Scroll Reveal ────────────────────────────────────────────
 const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 // ── Testimonial Slider ───────────────────────────────────────
@@ -58,10 +55,10 @@ const dots  = document.querySelectorAll('.slider-dot');
 let current = 0, timer;
 function goTo(n) {
   items[current].classList.remove('active');
-  dots[current].classList.remove('active');
+  dots[current] && dots[current].classList.remove('active');
   current = (n + items.length) % items.length;
   items[current].classList.add('active');
-  dots[current].classList.add('active');
+  dots[current] && dots[current].classList.add('active');
 }
 if (items.length) {
   dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); restart(); }));
