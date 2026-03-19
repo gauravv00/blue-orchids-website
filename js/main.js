@@ -1,4 +1,4 @@
-// ── Navbar scroll shadow ─────────────────────────────────────
+// ── Navbar scroll shadow ──────────────────────────────────────
 const navbar = document.querySelector('.navbar');
 if (navbar) {
   window.addEventListener('scroll', () => {
@@ -6,42 +6,44 @@ if (navbar) {
   }, { passive: true });
 }
 
-// ── Mobile menu (pure CSS toggle, no JS position hacks) ──────
+// ── Mobile menu — overlay appended to body ───────────────────
+const overlay = document.createElement('div');
+overlay.className = 'mobile-nav-overlay';
+const desktopUL = document.querySelector('.nav-desktop ul');
+overlay.innerHTML = `
+  <button class="mobile-nav-close" onclick="closeMenu()" aria-label="Close menu">&times;</button>
+  <ul class="nav-links">${desktopUL ? desktopUL.innerHTML : ''}</ul>
+`;
+document.body.appendChild(overlay);
+
 function openMenu() {
-  const nav = document.querySelector('.nav-desktop');
-  if (!nav) return;
-  nav.classList.add('open');
-  document.documentElement.style.overflow = 'hidden'; // lock scroll on <html>, not body
+  overlay.classList.add('open');
+  document.documentElement.style.overflow = 'hidden';
 }
 function closeMenu() {
-  const nav = document.querySelector('.nav-desktop');
-  if (!nav) return;
-  nav.classList.remove('open');
-  document.documentElement.style.overflow = ''; // restore
+  overlay.classList.remove('open');
+  document.documentElement.style.overflow = '';
 }
 function toggleMenu() {
-  const nav = document.querySelector('.nav-desktop');
-  if (!nav) return;
-  nav.classList.contains('open') ? closeMenu() : openMenu();
+  overlay.classList.contains('open') ? closeMenu() : openMenu();
 }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeMenu();
-});
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', closeMenu);
-});
-
-// ── Active nav link ──────────────────────────────────────────
+// ── Active nav link (desktop + overlay) ──────────────────────
 const page = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-links a').forEach(a => {
-  const href = a.getAttribute('href');
-  if (href === page || (page === '' && href === 'index.html')) {
+  if (a.getAttribute('href') === page || (page === '' && a.getAttribute('href') === 'index.html')) {
     a.classList.add('active');
   }
 });
+overlay.querySelectorAll('.nav-links a').forEach(a => {
+  if (a.getAttribute('href') === page || (page === '' && a.getAttribute('href') === 'index.html')) {
+    a.classList.add('active');
+  }
+  a.addEventListener('click', closeMenu);
+});
 
-// ── Scroll Reveal ────────────────────────────────────────────
+// ── Scroll Reveal ─────────────────────────────────────────────
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); }
@@ -49,7 +51,7 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// ── Testimonial Slider ───────────────────────────────────────
+// ── Testimonial Slider ────────────────────────────────────────
 const items = document.querySelectorAll('.testimonial-item');
 const dots  = document.querySelectorAll('.slider-dot');
 let current = 0, timer;
@@ -66,7 +68,7 @@ if (items.length) {
   restart();
 }
 
-// ── Counter animation ────────────────────────────────────────
+// ── Counter animation ─────────────────────────────────────────
 function animateCount(el) {
   const target = parseInt(el.dataset.count, 10);
   const suffix = el.dataset.suffix || '';
