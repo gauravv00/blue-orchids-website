@@ -1,4 +1,4 @@
-// ── Navbar scroll shadow ──────────────────────────────────────
+// ── Navbar scroll shadow ─────────────────────────────────────
 const navbar = document.querySelector('.navbar');
 if (navbar) {
   window.addEventListener('scroll', () => {
@@ -6,61 +6,62 @@ if (navbar) {
   }, { passive: true });
 }
 
-// ── Mobile menu — overlay appended to body ───────────────────
-const overlay = document.createElement('div');
-overlay.className = 'mobile-nav-overlay';
-const desktopUL = document.querySelector('.nav-desktop ul');
-overlay.innerHTML = `
-  <button class="mobile-nav-close" onclick="closeMenu()" aria-label="Close menu">&times;</button>
-  <ul class="nav-links">${desktopUL ? desktopUL.innerHTML : ''}</ul>
-`;
-document.body.appendChild(overlay);
-
-function openMenu() {
-  overlay.classList.add('open');
-  document.documentElement.style.overflow = 'hidden';
-}
-function closeMenu() {
-  overlay.classList.remove('open');
-  document.documentElement.style.overflow = '';
-}
+// ── Mobile menu ──────────────────────────────────────────────
 function toggleMenu() {
-  overlay.classList.contains('open') ? closeMenu() : openMenu();
+  const nav = document.querySelector('.navbar nav');
+  const btn = document.querySelector('.menu-toggle');
+  if (!nav) return;
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+  const spans = btn.querySelectorAll('span');
+  if (open) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px,5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px,-5px)';
+  } else {
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  }
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const nav = document.querySelector('.navbar nav');
+    if (nav && nav.classList.contains('open')) toggleMenu();
+  }
+});
+// Close on nav link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    const nav = document.querySelector('.navbar nav');
+    if (nav && nav.classList.contains('open')) toggleMenu();
+  });
+});
 
-// ── Active nav link (desktop + overlay) ──────────────────────
+// ── Active nav link ──────────────────────────────────────────
 const page = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-links a').forEach(a => {
-  if (a.getAttribute('href') === page || (page === '' && a.getAttribute('href') === 'index.html')) {
+  const href = a.getAttribute('href');
+  if (href === page || (page === '' && href === 'index.html')) {
     a.classList.add('active');
   }
-});
-overlay.querySelectorAll('.nav-links a').forEach(a => {
-  if (a.getAttribute('href') === page || (page === '' && a.getAttribute('href') === 'index.html')) {
-    a.classList.add('active');
-  }
-  a.addEventListener('click', closeMenu);
 });
 
-// ── Scroll Reveal ─────────────────────────────────────────────
+// ── Scroll Reveal ────────────────────────────────────────────
 const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); }
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// ── Testimonial Slider ────────────────────────────────────────
+// ── Testimonial Slider ───────────────────────────────────────
 const items = document.querySelectorAll('.testimonial-item');
 const dots  = document.querySelectorAll('.slider-dot');
 let current = 0, timer;
 function goTo(n) {
   items[current].classList.remove('active');
-  dots[current] && dots[current].classList.remove('active');
+  dots[current].classList.remove('active');
   current = (n + items.length) % items.length;
   items[current].classList.add('active');
-  dots[current] && dots[current].classList.add('active');
+  dots[current].classList.add('active');
 }
 if (items.length) {
   dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); restart(); }));
@@ -68,7 +69,7 @@ if (items.length) {
   restart();
 }
 
-// ── Counter animation ─────────────────────────────────────────
+// ── Counter animation ────────────────────────────────────────
 function animateCount(el) {
   const target = parseInt(el.dataset.count, 10);
   const suffix = el.dataset.suffix || '';
