@@ -28,8 +28,8 @@
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:var(--font-b);color:var(--ink);background:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:var(--header-h)}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
+body{font-family:var(--font-b);color:var(--ink);background:var(--ivory);overflow:visible!important;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:var(--header-h)}
 img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
