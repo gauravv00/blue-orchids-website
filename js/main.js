@@ -11,13 +11,13 @@ function openMenu() {
   const nav = document.querySelector('.nav-desktop');
   if (!nav) return;
   nav.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden'; // lock scroll on <html>, not body
 }
 function closeMenu() {
   const nav = document.querySelector('.nav-desktop');
   if (!nav) return;
   nav.classList.remove('open');
-  document.body.style.overflow = '';
+  document.documentElement.style.overflow = ''; // restore
 }
 function toggleMenu() {
   const nav = document.querySelector('.nav-desktop');
