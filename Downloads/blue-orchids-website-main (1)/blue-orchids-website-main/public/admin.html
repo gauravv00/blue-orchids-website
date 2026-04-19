@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Blue Orchids – Bookings</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="./assets/logo.png">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    /* Injected premium styling override */
+    body.admin-page { background-color: #f7f9fc; }
+    .admin-header {
+      background: linear-gradient(135deg, #0f1c32 0%, #1a2b4c 100%);
+      padding: 60px 24px 80px;
+      position: relative;
+    }
+    .admin-header::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px;
+      background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+    }
+    .admin-stats { margin-top: -60px; column-gap: 24px; row-gap: 24px; }
+    .admin-stat-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 12px;
+      padding: 30px 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .admin-stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+      background: var(--gold); transform: scaleX(0); transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+    .admin-stat-card:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08); 
+    }
+    .admin-stat-card:hover::before { transform: scaleX(1); }
+    .stat-icon {
+      width: 28px; height: 28px; margin: 0 auto 16px auto; display: block;
+      color: var(--navy); opacity: 0.8;
+    }
+    .admin-controls { margin-top: 40px; margin-bottom: 20px;}
+    .admin-table { box-shadow: 0 5px 25px rgba(0,0,0,0.03); border: none; }
+    .admin-table th { background: #121e33; color: #eed4a2; letter-spacing: 0.1em; }
+    .admin-table td { border-bottom: 1px solid #f0f0f0; padding: 16px; }
+    .admin-table tr { transition: background 0.2s ease; }
+    .admin-table tr:hover { background: #fafbfc; }
+    .status-badge { box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
+  </style>
+</head>
+
+<body class="admin-page">
+  <!-- Admin Header -->
+  <div class="admin-header">
+    <a href="index.html" style="display:inline-block;margin-bottom:16px;">
+      <img src="./assets/logo.png" alt="Blue Orchids" style="height:56px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+    </a>
+    <h1 style="font-size: 2.4rem;">Booking <em>Dashboard</em></h1>
+    <p style="font-size: .88rem; letter-spacing: 0.05em;">Manage all appointments · Blue Orchids – The Beauty Hub</p>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="admin-stats">
+    <div class="admin-stat-card">
+      <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+      <div class="stat-value" id="stat-total">0</div>
+      <div class="stat-label">Total Bookings</div>
+    </div>
+    <div class="admin-stat-card">
+      <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <div class="stat-value" id="stat-today">0</div>
+      <div class="stat-label">Today</div>
+    </div>
+    <div class="admin-stat-card">
+      <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <div class="stat-value" id="stat-pending">0</div>
+      <div class="stat-label">Pending</div>
+    </div>
+    <div class="admin-stat-card">
+      <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      <div class="stat-value" id="stat-confirmed">0</div>
+      <div class="stat-label">Confirmed</div>
+    </div>
+    <div class="admin-stat-card">
+      <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      <div class="stat-value" id="stat-paid">0</div>
+      <div class="stat-label">Paid</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="admin-controls">
+    <input type="text" id="admin-search" placeholder="Search by name, email, or phone...">
+    <select id="admin-filter">
+      <option value="">All Status</option>
+      <option value="pending">Pending</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="cancelled">Cancelled</option>
+    </select>
+    <button class="admin-refresh-btn" id="admin-refresh" style="box-shadow: 0 4px 12px rgba(26, 43, 76, 0.2);">↻ Refresh</button>
+    <button class="admin-btn delete-btn" id="admin-delete-all" style="padding:10px 18px;font-size:.82rem; margin-left: auto;">🗑 Delete All Bookings</button>
+  </div>
+
+  <!-- Bookings Table -->
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Guests</th>
+          <th>Requests</th>
+          <th>Status</th>
+          <th>Payment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="bookings-table-body">
+        <tr>
+          <td colspan="11" class="admin-loading" style="padding: 60px;">Loading bookings...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="text-align:center;padding:20px; font-family: var(--font-b); font-size: 0.88rem;">
+    <a href="index.html" style="color:var(--gold);text-decoration:none; display: inline-flex; align-items: center; gap: 6px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Website
+    </a>
+  </div>
+
+  <script src="./js/admin.js?v=3"></script>
+</body>
+
+</html>
