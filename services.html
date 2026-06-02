@@ -10,19 +10,33 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="top-bar">Gudi Padwa Special Offers On &nbsp;&middot;&nbsp; Call <strong>+91 87932 69981</strong></div>
-  <div class="navbar">
-    <div class="nav-inner">
-      <div class="logo"><a href="index.html"><img src="./assets/logo.png" alt="Blue Orchids"></a></div>
-      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
-      <nav class="nav-desktop">
-
-        <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">Our Story</a></li><li><a href="services.html" class="active">Services</a></li><li><a href="offers.html">Offers</a></li><li><a href="locations.html">Locations</a></li><li><a href="contact.html" class="nav-book-btn">Book Now</a></li></ul>
-      </nav>
-    </div>
+<div class="top-bar">Gudi Padwa Special Offers &nbsp;·&nbsp; Call <strong>+91 87932 69981</strong></div>
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Blue Orchids – Home">
+      <img src="./assets/logo.png" alt="Blue Orchids – The Beauty Hub">
+    </a>
+    <button class="menu-toggle" id="menu-toggle" type="button"
+            aria-expanded="false" aria-controls="nav-menu"
+            aria-label="Open navigation menu">
+      <span class="bar" aria-hidden="true"></span>
+      <span class="bar" aria-hidden="true"></span>
+      <span class="bar" aria-hidden="true"></span>
+    </button>
+    <nav class="nav-menu" id="nav-menu" aria-label="Main navigation" aria-hidden="true">
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="contact.html" class="nav-book-btn">Book Now</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
+<div class="nav-overlay" id="nav-overlay" hidden aria-hidden="true"></div>
+
 
 <div class="page-hero">
   <p class="page-hero-label">Women Only · Magarpatta City</p>
